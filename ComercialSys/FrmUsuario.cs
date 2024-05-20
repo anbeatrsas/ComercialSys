@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ComClassSys;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -21,13 +22,44 @@ namespace ComercialSys
         private void btnInserir_Click(object sender, EventArgs e)
         {
 
-            txtBusca.Text = $"{txtNome.Text} - {txtEmail.Text} - {txtSenha.Text}";
+            string nivel = String.Empty;
+            nivel = cmbNivel.SelectedIndex == 0 ? "A" : "G"; // se o index selecionado for igual a 0 entao == "a" 
+
+            Usuario usuario = new Usuario(txtNome.Text, txtEmail.Text, txtSenha.Text, nivel);
+            usuario.Inserir();
+
+            FrmUsuario_Load(sender, e);
+
+            // criando uma nova instancia de usuario com seus parâmetros e clicamos em inserir
 
 
         }
 
         private void btnConsultar_Click(object sender, EventArgs e)
         {
+
+        }
+
+        private void FrmUsuario_Load(object sender, EventArgs e)
+        {
+
+            var lista = Usuario.ObterLista();
+            //quando usamos var o nome que nos declaramos ao objeto ele vai se comportar de acordo com oq vem depois do sinal de "="
+            dgvUsuarios.Rows.Clear();
+            int count = 0;
+
+            foreach (var usuario in lista)
+            {
+                dgvUsuarios.Rows.Add(); // adicionando uma nova linha no datagrid
+                dgvUsuarios.Rows[count].Cells[0].Value = usuario.Id;
+                dgvUsuarios.Rows[count].Cells[1].Value = usuario.Nome;
+                dgvUsuarios.Rows[count].Cells[2].Value = usuario.Email;
+                dgvUsuarios.Rows[count].Cells[3].Value = usuario.Nivel;
+                dgvUsuarios.Rows[count].Cells[4].Value = usuario.Ativo;
+
+                count++;
+
+            }
 
         }
     }
