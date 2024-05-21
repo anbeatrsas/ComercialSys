@@ -165,11 +165,11 @@
             // cmbNivel
             // 
             cmbNivel.FormattingEnabled = true;
-            cmbNivel.Items.AddRange(new object[] { "1°- Atendente", "2°- Caixa", "3°- Gerente", "4°- Estoquista", "5°- Empacotador" });
             cmbNivel.Location = new Point(351, 162);
             cmbNivel.Name = "cmbNivel";
             cmbNivel.Size = new Size(121, 23);
             cmbNivel.TabIndex = 4;
+            cmbNivel.SelectedIndexChanged += cmbNivel_SelectedIndexChanged;
             // 
             // btnConsultar
             // 

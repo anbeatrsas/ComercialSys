@@ -10,8 +10,8 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- -----------------------------------------------------
 -- Schema comercialdb
 -- -----------------------------------------------------
-DROP Schema `comercialdb`;
- -- -----------------------------------------------------
+drop Schema `comercialdb`;
+-- -----------------------------------------------------
 -- Schema comercialdb
 -- -----------------------------------------------------
 CREATE SCHEMA IF NOT EXISTS `comercialdb` DEFAULT CHARACTER SET utf8 ;
@@ -36,8 +36,8 @@ CREATE TABLE IF NOT EXISTS `comercialdb`.`usuarios` (
   `nome` VARCHAR(60) NOT NULL,
   `email` VARCHAR(60) NOT NULL,
   `senha` VARCHAR(32) NOT NULL,
-  `ativo` BIT(1) NOT NULL DEFAULT b'1',
   `nivel_id` INT NOT NULL,
+  `ativo` BIT(1) NOT NULL DEFAULT b'1',
   PRIMARY KEY (`id`),
   UNIQUE INDEX `email_UNIQUE` (`email` ASC) ,
   INDEX `fk_usuarios_niveis1_idx` (`nivel_id` ASC) ,
@@ -47,7 +47,7 @@ CREATE TABLE IF NOT EXISTS `comercialdb`.`usuarios` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
-AUTO_INCREMENT = 1007
+AUTO_INCREMENT = 1006
 DEFAULT CHARACTER SET = utf8;
 
 
@@ -61,7 +61,7 @@ CREATE TABLE IF NOT EXISTS `comercialdb`.`caixas` (
   `saldo_inicial` DECIMAL(10,2) NOT NULL,
   `status` CHAR(1) NOT NULL DEFAULT 'A',
   PRIMARY KEY (`id`),
-  INDEX `fk_Caixa_Usuarios1_idx` (`usuario_id` ASC),
+  INDEX `fk_Caixa_Usuarios1_idx` (`usuario_id` ASC) ,
   CONSTRAINT `fk_Caixa_Usuarios1`
     FOREIGN KEY (`usuario_id`)
     REFERENCES `comercialdb`.`usuarios` (`id`)
@@ -97,8 +97,8 @@ CREATE TABLE IF NOT EXISTS `comercialdb`.`clientes` (
   `data_cad` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
   `ativo` BIT(1) NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `cpf_UNIQUE` (`cpf` ASC),
-  UNIQUE INDEX `email_UNIQUE` (`email` ASC))
+  UNIQUE INDEX `cpf_UNIQUE` (`cpf` ASC) ,
+  UNIQUE INDEX `email_UNIQUE` (`email` ASC) )
 ENGINE = InnoDB
 AUTO_INCREMENT = 25
 DEFAULT CHARACTER SET = utf8;
@@ -119,7 +119,7 @@ CREATE TABLE IF NOT EXISTS `comercialdb`.`enderecos` (
   `uf` CHAR(2) NOT NULL,
   `tipo_endereco` CHAR(3) NOT NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_table1_clientes_idx` (`cliente_id` ASC),
+  INDEX `fk_table1_clientes_idx` (`cliente_id` ASC) ,
   CONSTRAINT `fk_table1_clientes`
     FOREIGN KEY (`cliente_id`)
     REFERENCES `comercialdb`.`clientes` (`id`)
@@ -145,9 +145,9 @@ CREATE TABLE IF NOT EXISTS `comercialdb`.`produtos` (
   `imagem` BLOB NULL DEFAULT NULL,
   `data_cad` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `idProduto_UNIQUE` (`id` ASC),
-  UNIQUE INDEX `Produtocol_UNIQUE` (`cod_barras` ASC),
-  INDEX `fk_Produto_Categorias1_idx` (`categoria_id` ASC),
+  UNIQUE INDEX `idProduto_UNIQUE` (`id` ASC) ,
+  UNIQUE INDEX `Produtocol_UNIQUE` (`cod_barras` ASC) ,
+  INDEX `fk_Produto_Categorias1_idx` (`categoria_id` ASC) ,
   CONSTRAINT `fk_Produto_Categorias1`
     FOREIGN KEY (`categoria_id`)
     REFERENCES `comercialdb`.`categorias` (`id`)
@@ -165,7 +165,7 @@ CREATE TABLE IF NOT EXISTS `comercialdb`.`estoques` (
   `produto_id` INT(4) NOT NULL,
   `quantidade` DECIMAL(10,2) NOT NULL,
   `data_ultimo_movimento` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP() ON UPDATE CURRENT_TIMESTAMP(),
-  INDEX `fk_Estoque_Produto1_idx` (`produto_id` ASC),
+  INDEX `fk_Estoque_Produto1_idx` (`produto_id` ASC) ,
   CONSTRAINT `fk_Estoque_Produto1`
     FOREIGN KEY (`produto_id`)
     REFERENCES `comercialdb`.`produtos` (`id`)
@@ -187,7 +187,7 @@ CREATE TABLE IF NOT EXISTS `comercialdb`.`fornecedores` (
   `telefone` VARCHAR(45) NULL DEFAULT NULL,
   `email` VARCHAR(60) NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `cnpj_UNIQUE` (`cnpj` ASC))
+  UNIQUE INDEX `cnpj_UNIQUE` (`cnpj` ASC) )
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
@@ -203,8 +203,8 @@ CREATE TABLE IF NOT EXISTS `comercialdb`.`pedidos` (
   `status` CHAR(1) NOT NULL DEFAULT 'A',
   `desconto` DECIMAL(10,2) NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_Pedido_Usuarios1_idx` (`usuario_id` ASC),
-  INDEX `fk_Pedido_Clientes1_idx` (`cliente_id` ASC),
+  INDEX `fk_Pedido_Usuarios1_idx` (`usuario_id` ASC) ,
+  INDEX `fk_Pedido_Clientes1_idx` (`cliente_id` ASC) ,
   CONSTRAINT `fk_Pedido_Clientes1`
     FOREIGN KEY (`cliente_id`)
     REFERENCES `comercialdb`.`clientes` (`id`)
@@ -231,8 +231,8 @@ CREATE TABLE IF NOT EXISTS `comercialdb`.`itempedido` (
   `quantidade` DECIMAL(10,2) NOT NULL,
   `desconto` DECIMAL(10,2) NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_ItemPedido_Pedido1_idx` (`pedido_id` ASC),
-  INDEX `fk_ItemPedido_Produto1_idx` (`produto_id` ASC),
+  INDEX `fk_ItemPedido_Pedido1_idx` (`pedido_id` ASC) ,
+  INDEX `fk_ItemPedido_Produto1_idx` (`produto_id` ASC) ,
   CONSTRAINT `fk_ItemPedido_Pedido1`
     FOREIGN KEY (`pedido_id`)
     REFERENCES `comercialdb`.`pedidos` (`id`)
@@ -255,8 +255,8 @@ CREATE TABLE IF NOT EXISTS `comercialdb`.`produtofornecedor` (
   `produto_id` INT(4) NOT NULL,
   `fornecedores_id` INT(4) NOT NULL,
   PRIMARY KEY (`produto_id`, `fornecedores_id`),
-  INDEX `fk_Produto_has_Fornecedores_Fornecedores1_idx` (`fornecedores_id` ASC),
-  INDEX `fk_Produto_has_Fornecedores_Produto1_idx` (`produto_id` ASC),
+  INDEX `fk_Produto_has_Fornecedores_Fornecedores1_idx` (`fornecedores_id` ASC) ,
+  INDEX `fk_Produto_has_Fornecedores_Produto1_idx` (`produto_id` ASC) ,
   CONSTRAINT `fk_Produto_has_Fornecedores_Fornecedores1`
     FOREIGN KEY (`fornecedores_id`)
     REFERENCES `comercialdb`.`fornecedores` (`id`)
