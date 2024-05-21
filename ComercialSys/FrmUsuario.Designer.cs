@@ -175,11 +175,11 @@
             // 
             btnConsultar.Location = new Point(325, 240);
             btnConsultar.Name = "btnConsultar";
-            btnConsultar.Size = new Size(75, 23);
+            btnConsultar.Size = new Size(110, 23);
             btnConsultar.TabIndex = 7;
             btnConsultar.Text = "&Consultar";
             btnConsultar.UseVisualStyleBackColor = true;
-            btnConsultar.Click += btnConsultar_Click;
+            btnConsultar.Click += btnConsultar_Click_1;
             // 
             // btnEditar
             // 

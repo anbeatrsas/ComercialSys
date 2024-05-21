@@ -35,10 +35,6 @@ namespace ComercialSys
 
         }
 
-        private void btnConsultar_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void FrmUsuario_Load(object sender, EventArgs e)
         {
@@ -60,6 +56,36 @@ namespace ComercialSys
                 count++;
 
             }
+
+        }
+
+        private void btnConsultar_Click_1(object sender, EventArgs e)
+        {
+
+            if (btnConsultar.Text == "&Consultar")
+            {
+                txtId.ReadOnly = false;
+                txtId.Focus(); // cursor piscando dentro da caixa de id
+                btnConsultar.Text = "Obter por ID";
+            }
+            else
+            {
+
+                if(txtId.Text.Length > 0)
+                {
+
+                    Usuario usuario = Usuario.ObterPorId(int.Parse(txtId.Text));
+                    txtNome.Text = usuario.Nome;
+                    txtEmail.Text = usuario.Email;
+                    txtId.ReadOnly = true;
+                    btnConsultar.Text = "&Consultar";
+
+
+                }
+
+            }
+
+            
 
         }
     }
