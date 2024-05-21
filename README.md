@@ -1,6 +1,6 @@
 # 📚 Projeto de Sistema com C#
 
-## Repositório contem:
+## ✔ Repositório contem:
 
 | Nome | Descrição |
 |------------------ | -------------------------------------------- |
