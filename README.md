@@ -4,9 +4,9 @@
 
 | Nome | Descrição |
 |------------------ | -------------------------------------------- |
-| Formulários em C# | Automação da Administração de Banco de Dados |
-| Banco de Dados | Básico para o sistema | 
-| Dados Excel | Inserção de dados no Banco de Dados baseado no Negocio | 
+| Formulários em C# | Automação e coleta de informações através de janelas |
+| Banco de Dados | Local de armazenamento dos dados fornecidos | 
+| Dados Excel | Inserção de dados no Banco de Dados baseado no negocio | 
 
 
 
