@@ -20,11 +20,26 @@ namespace ComercialSys
         private void usuárioToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
-            FrmUsuario frmUsuario = new FrmUsuario(); 
+            FrmUsuario frmUsuario = new FrmUsuario();
             frmUsuario.MdiParent = this; // quem é o pai da frmUsuário? MdiParent = this, no caso o pai é a janela atual por isso usamos this
-            frmUsuario.Show();
-
             frmUsuario.StartPosition = FormStartPosition.CenterScreen;
+            frmUsuario.Show();
+        }
+
+        private void categoriasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            FrmCategoria frmCategoria = new FrmCategoria();
+            frmCategoria.MdiParent = this;
+            
+            frmCategoria.StartPosition = FormStartPosition.CenterScreen;
+            frmCategoria.Show();
+
+        }
+
+        private void FrmPrincipal_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

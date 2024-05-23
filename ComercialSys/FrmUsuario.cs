@@ -38,8 +38,8 @@ namespace ComercialSys
             //cmbNivel.Items.Clear();
             var niveis = Nivel.ObterLista();
             cmbNivel.DataSource = niveis;
-            cmbNivel.DisplayMember = "nome"; // display = exibir 
-            cmbNivel.ValueMember = "id";
+            cmbNivel.DisplayMember = "nome"; // display = exibir o nome do nivel
+            cmbNivel.ValueMember = "id"; // quer que o valor que retone é o id
 
 
             var lista = Usuario.ObterLista();
@@ -47,7 +47,7 @@ namespace ComercialSys
             dgvUsuarios.Rows.Clear();
             int count = 0;
 
-            foreach (var usuario in lista)
+            foreach (var usuario in lista) 
             {
                 dgvUsuarios.Rows.Add(); // adicionando uma nova linha no datagrid
                 dgvUsuarios.Rows[count].Cells[0].Value = usuario.Id;
@@ -67,9 +67,18 @@ namespace ComercialSys
 
             if (btnConsultar.Text == "&Consultar")
             {
+                txtNome.Clear(); // limpa nome
+                txtEmail.Clear(); // limpa email
+                txtSenha.Clear(); // limpa campo senha
+                txtConfSenha.Clear(); // limpa confSenha
+
                 txtId.ReadOnly = false;
                 txtId.Focus(); // cursor piscando dentro da caixa de id
                 btnConsultar.Text = "Obter por ID";
+                txtSenha.PlaceholderText = string.Empty;
+
+
+
             }
             else
             {
@@ -82,8 +91,10 @@ namespace ComercialSys
                     txtEmail.Text = usuario.Email;
                     txtId.ReadOnly = true;
                     btnConsultar.Text = "&Consultar";
+                    txtSenha.PlaceholderText = "[senha não alterada]"; // se o usuario nao digitar nenhuma senha isso sera mostrado
+                    cmbNivel.SelectedValue = usuario.Nivel.Id; // faca com que o valor selecionado retorne como o id do nível de usuario
 
-
+                    btnEditar.Enabled = true;
                 }
 
             }
@@ -96,6 +107,44 @@ namespace ComercialSys
         {
 
 
+
+        }
+
+        private void btnEditar_Click(object sender, EventArgs e)
+        {
+
+            //método construtor editar 
+
+            Usuario usuario = new(
+                int.Parse(txtId.Text),
+                txtNome.Text,
+                txtEmail.Text,
+                txtSenha.Text,
+                Nivel.ObterPorId(Convert.ToInt32(cmbNivel.SelectedValue)),
+                true
+                );
+
+            if (usuario.Editar(usuario.Id))
+            {
+
+                FrmUsuario_Load(sender, e); // gravando a dateGridView com os novos dados
+                MessageBox.Show($"O usuario {usuario.Nome} foi alterado com sucesso!");
+
+            }
+            else
+            {
+                MessageBox.Show($"Falha ao alterar o Usuário \"{usuario.Nome}\" !");
+
+            }
+        }
+
+        private void txtId_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dgvUsuarios_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
 
         }
     }

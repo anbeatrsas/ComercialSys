@@ -71,6 +71,7 @@
             txtId.ReadOnly = true;
             txtId.Size = new Size(57, 23);
             txtId.TabIndex = 8;
+            txtId.TextChanged += txtId_TextChanged;
             // 
             // txtNome
             // 
@@ -183,12 +184,14 @@
             // 
             // btnEditar
             // 
+            btnEditar.Enabled = false;
             btnEditar.Location = new Point(235, 240);
             btnEditar.Name = "btnEditar";
             btnEditar.Size = new Size(75, 23);
             btnEditar.TabIndex = 6;
             btnEditar.Text = "&Editar";
             btnEditar.UseVisualStyleBackColor = true;
+            btnEditar.Click += btnEditar_Click;
             // 
             // btnInserir
             // 
@@ -221,6 +224,7 @@
             dgvUsuarios.RowHeadersVisible = false;
             dgvUsuarios.Size = new Size(500, 150);
             dgvUsuarios.TabIndex = 3;
+            dgvUsuarios.CellContentClick += dgvUsuarios_CellContentClick;
             // 
             // clnid
             // 

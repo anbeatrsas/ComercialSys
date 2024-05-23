@@ -65,9 +65,28 @@ namespace ComClassSys
 
         public bool Editar(int id) 
         {
+            bool resultado = false;
 
+            var cmd = Banco.Abrir();
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.CommandText = "sp_usuario_altera"; // nome da procedure de alterar usuario
+            cmd.Parameters.AddWithValue("spid", Id);
+            cmd.Parameters.AddWithValue("spnome", Nome);
+            cmd.Parameters.AddWithValue("spsenha", Senha);
+            cmd.Parameters.AddWithValue("spnivel", Nivel.Id); // por ser chave estrangeira precisamos passar o ID de NIVEL
 
-            return true;
+            try
+            {
+                cmd.ExecuteNonQuery(); // executando o codigo
+                resultado = true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+            return resultado;
         }
 
         public static Usuario ObterPorId(int id) // apenas retorna o usuario com o id 
