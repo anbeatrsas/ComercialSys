@@ -273,6 +273,7 @@
             txtBusca.PlaceholderText = "Digite pelo menos duas letras para pesquisar usuário";
             txtBusca.Size = new Size(500, 23);
             txtBusca.TabIndex = 1;
+            txtBusca.TextChanged += txtBusca_TextChanged;
             // 
             // FrmUsuario
             // 

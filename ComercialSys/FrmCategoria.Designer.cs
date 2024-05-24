@@ -195,6 +195,7 @@
             txtBusca.PlaceholderText = "Digite pelo menos duas letras para buscar categoria ";
             txtBusca.Size = new Size(398, 23);
             txtBusca.TabIndex = 4;
+            txtBusca.TextChanged += txtBusca_TextChanged;
             // 
             // FrmCategoria
             // 

@@ -55,14 +55,27 @@ namespace ComClassSys
 
         }
 
-        public static List<Categoria> ObterLista()
+        public static List<Categoria> ObterLista(string nome = null)
         {
 
             List<Categoria> lista = new List<Categoria>();
             var cmd = Banco.Abrir();
-            cmd.CommandType = CommandType.Text;
-            cmd.CommandText = "select * from categorias";
+            cmd.CommandType = CommandType.Text;  
+            if(nome == null)
+            {
+                cmd.CommandText = "select * from categorias";
+
+            }
+           else
+            {
+                cmd.CommandText = $"select * from categorias where nome like '%{nome}%' order by nome";
+            }
+
+            //cmd.CommandText = "select * from categorias";
             var dr = cmd.ExecuteReader(); // armazenar o resultado na consulta em dr
+
+      
+
 
             while (dr.Read())
             {

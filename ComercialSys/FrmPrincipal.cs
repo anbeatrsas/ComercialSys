@@ -40,6 +40,17 @@ namespace ComercialSys
         private void FrmPrincipal_Load(object sender, EventArgs e)
         {
 
+            FrmLogin login = new();
+            //login.MdiParent = this;
+
+            login.StartPosition = FormStartPosition.CenterScreen;
+            // this.Hide(); // so visualizar a tela de login
+            login.ShowDialog();
+
+            tslUsuario.Text = Program.Usuario.Nome + " - " + Program.Usuario.Nivel.Nome;
+
+
+
         }
     }
 }

@@ -98,7 +98,7 @@ namespace ComercialSys
                 txtNome.Text,
                 txtSigla.Text
 
-                ) ;
+                );
 
             if (categoria.Editar(categoria.Id))
             {
@@ -114,6 +114,34 @@ namespace ComercialSys
 
             }
 
+        }
+
+        private void txtBusca_TextChanged(object sender, EventArgs e)
+        {
+
+            if (txtBusca.Text.Length > 1)
+            {
+
+                var lista = Categoria.ObterLista(txtBusca.Text);
+                dgvCategoria.Rows.Clear();
+                int count = 0;
+
+                foreach (var categoria in lista)
+                {
+                    dgvCategoria.Rows.Add();
+                    dgvCategoria.Rows[count].Cells[0].Value = categoria.Id;
+                    dgvCategoria.Rows[count].Cells[1].Value = categoria.Nome;
+                    dgvCategoria.Rows[count].Cells[2].Value = categoria.Sigla;
+                    count++;
+                }
+            }
+            else
+            {
+                FrmCategoria_Load_1(sender, e);
+            }
+
+                
+            
         }
     }
 }

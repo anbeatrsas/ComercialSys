@@ -119,13 +119,30 @@ namespace ComClassSys
 
         }
 
-        public static List<Usuario> ObterLista() // entrega uma lista de usuário, usando static sem criar a classe usuario
+        public static List<Usuario> ObterLista(string nome=null) // entrega uma lista de usuário, usando static sem criar a classe usuario
         {
             List<Usuario> lista = new List<Usuario>();
             var cmd = Banco.Abrir();
             cmd.CommandType = CommandType.Text;
-            cmd.CommandText = "select * from usuarios"; // pegando a consulta
+            if(nome == null)
+            {
+
+                cmd.CommandText = "select * from usuarios";
+
+            }
+            else
+            {
+
+                cmd.CommandText = $"select * from usuarios where nome like '%{nome}%' order by nome"; // todos os nomes que tem alguma letra digitada
+
+            }
+            // cmd.CommandText = "select * from usuarios"; // pegando a consulta
             var dr = cmd.ExecuteReader(); // resultado da consulta mysql, guardando o resultado da consulta
+
+
+
+
+
 
             while (dr.Read()) // Read tem a função de avancar para o proximo registro
             {
@@ -139,6 +156,32 @@ namespace ComClassSys
                                      ));
             } 
             return lista;
+        }
+
+        public static Usuario EfetuarLogin(string email, string senha)
+        {
+
+            Usuario usuario = new();
+            var cmd = Banco.Abrir();
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = $"select * from usuarios" +
+                $" where email = '{email}' and senha = md5('{senha}') and ativo = 1";
+            var dr = cmd.ExecuteReader();
+
+            while (dr.Read())
+            {
+
+                usuario.Id = dr.GetInt32(0);
+                usuario.Nome = dr.GetString(1);
+                usuario.Email = dr.GetString(2);
+                usuario.Senha = dr.GetString(3);
+                usuario.Nivel = Nivel.ObterPorId(Convert.ToInt32(dr.GetInt32(4)));
+                usuario.Ativo = dr.GetBoolean(5);
+
+            }
+
+            return usuario;
+
         }
 
 

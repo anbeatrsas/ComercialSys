@@ -47,7 +47,7 @@ namespace ComercialSys
             dgvUsuarios.Rows.Clear();
             int count = 0;
 
-            foreach (var usuario in lista) 
+            foreach (var usuario in lista)
             {
                 dgvUsuarios.Rows.Add(); // adicionando uma nova linha no datagrid
                 dgvUsuarios.Rows[count].Cells[0].Value = usuario.Id;
@@ -146,6 +146,40 @@ namespace ComercialSys
         private void dgvUsuarios_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+        private void txtBusca_TextChanged(object sender, EventArgs e)
+        {
+            if (txtBusca.Text.Length > 0)
+            {
+
+
+                var lista = Usuario.ObterLista(txtBusca.Text);
+                //quando usamos var o nome que nos declaramos ao objeto ele vai se comportar de acordo com oq vem depois do sinal de "="
+                dgvUsuarios.Rows.Clear();
+                int count = 0;
+
+                foreach (var usuario in lista)
+                {
+                    dgvUsuarios.Rows.Add(); // adicionando uma nova linha no datagrid
+                    dgvUsuarios.Rows[count].Cells[0].Value = usuario.Id;
+                    dgvUsuarios.Rows[count].Cells[1].Value = usuario.Nome;
+                    dgvUsuarios.Rows[count].Cells[2].Value = usuario.Email;
+                    dgvUsuarios.Rows[count].Cells[3].Value = usuario.Nivel.Nome; // queremos mostrar o nome do nivel
+                    dgvUsuarios.Rows[count].Cells[4].Value = usuario.Ativo;
+
+                    count++;
+
+                }
+            }
+
+            else
+            {
+                FrmUsuario_Load(sender, e);
+            }
+
+
+            
         }
     }
 }
