@@ -140,10 +140,6 @@ namespace ComClassSys
             var dr = cmd.ExecuteReader(); // resultado da consulta mysql, guardando o resultado da consulta
 
 
-
-
-
-
             while (dr.Read()) // Read tem a função de avancar para o proximo registro
             {
                 lista.Add(new Usuario(

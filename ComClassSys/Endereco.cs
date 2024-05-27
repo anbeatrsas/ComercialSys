@@ -71,5 +71,71 @@ namespace ComClassSys
 
         }
 
+        public bool Editar(int id)
+        {
+
+            bool resultado = false;
+
+            var cmd = Banco.Abrir();
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.CommandText = "sp_endereco_update";
+
+            cmd.Parameters.AddWithValue("spid", Id);
+            cmd.Parameters.AddWithValue("spcep", Cep);
+            cmd.Parameters.AddWithValue("splogradouro", Logradouro);
+            cmd.Parameters.AddWithValue("spnumero", Numero);
+            cmd.Parameters.AddWithValue("spcomplemento", Complemento);
+            cmd.Parameters.AddWithValue("spbairro", Bairro);
+            cmd.Parameters.AddWithValue("spcidade", Cidade);
+            cmd.Parameters.AddWithValue("spuf", Uf);
+            cmd.Parameters.AddWithValue("sptipo_endereco", Tipo_endereco);
+
+            try
+            {
+
+                cmd.ExecuteNonQuery();
+                resultado = true;
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+            return resultado;
+
+        }
+
+        public static Endereco ObterPorId(int id)
+        {
+
+            Endereco endereco = new();
+
+            var cmd = Banco.Abrir();
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = $"select * from enderecos where id = {id}";
+            var dr = cmd.ExecuteReader();
+
+            while (dr.Read())
+            {
+
+                endereco.Id = dr.GetInt32(0);
+                endereco.Cep = dr.GetString(1);
+                endereco.Logradouro = dr.GetString(2);
+                endereco.Numero = dr.GetString(3);
+                endereco.Complemento = dr.GetString(4);
+                endereco.Bairro = dr.GetString(5);
+                endereco.Cidade = dr.GetString(6);
+                endereco.Uf = dr.GetString(7);
+                endereco.Tipo_endereco = dr.GetString(6);
+
+            }
+
+
+            return endereco;
+        }
+
+
     }
 }

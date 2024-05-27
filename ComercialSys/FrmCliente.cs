@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ComClassSys;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,6 +16,29 @@ namespace ComercialSys
         public FrmCliente()
         {
             InitializeComponent();
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+
+        private void FrmCliente_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnInserir_Click(object sender, EventArgs e)
+        {
+
+            DateTime dataNascimento = txtDataNascimento.Value;
+
+            Cliente cliente = new Cliente(txtNome.Text, txtCpf.Text, txtTelefone.Text, txtEmail.Text, dataNascimento);
+            cliente.Inserir();
+
+            FrmCliente_Load(sender, e);
+
         }
     }
 }

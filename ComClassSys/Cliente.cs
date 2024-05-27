@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Mysqlx.Prepare;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -15,7 +17,7 @@ namespace ComClassSys
         public string? Cpf { get; set; }
         public string? Telefone { get; set; }
         public string? Email { get; set; }
-        public string? Data_nasc { get; set; }
+        public DateTime Data_nasc { get; set; }
         public bool Ativo { get; set; }
         public List<Endereco> Enderecos { get; set; }
 
@@ -27,7 +29,7 @@ namespace ComClassSys
 
         }
 
-        public Cliente(string nome, string cpf, string telefone, string email, string data_nasc) 
+        public Cliente(string nome, string cpf, string telefone, string email, DateTime data_nasc) 
         {
 
             Nome = nome;
@@ -38,7 +40,7 @@ namespace ComClassSys
         
         }
 
-        public Cliente(int id, string nome, string cpf, string telefone, string email, string data_nasc, bool ativo)
+        public Cliente(int id, string nome, string cpf, string telefone, string email, DateTime data_nasc, bool ativo)
         {
 
             Id = id;
@@ -54,6 +56,7 @@ namespace ComClassSys
         public void Inserir()
         {
 
+
             var cmd = Banco.Abrir();
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.CommandText = "sp_insere_cliente";
@@ -67,6 +70,34 @@ namespace ComClassSys
             cmd.ExecuteNonQuery();
 
         }
+
+        public static Cliente ObterPorId(int id)
+        {
+
+            Cliente cliente = new();
+            var cmd = Banco.Abrir();
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = $"select * from clientes where id = {id}";
+            var dr = cmd.ExecuteReader();
+
+            while (dr.Read())
+            {
+
+                cliente.Id = dr.GetInt32(0);
+                cliente.Nome = dr.GetString(1);
+                cliente.Cpf = dr.GetString(2);
+                cliente.Telefone = dr.GetString(3);
+                cliente.Email = dr.GetString(4);
+                cliente.Data_nasc = dr.GetDateTime(5);
+
+            }
+
+
+            return cliente;
+
+
+        }
+
 
 
 
