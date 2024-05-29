@@ -1,4 +1,5 @@
 ﻿using ComClassSys;
+using NcMaster;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -85,6 +86,27 @@ namespace ComercialSys
             endereco.Inserir();
 
             CarregaGrid(int.Parse(txtClienteId.Text));
+        }
+
+
+
+        private void mxtCep_Leave(object sender, EventArgs e)
+        {
+
+            mxtCep.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
+            if(mxtCep.Text.Length == 8)
+            {
+
+                WebCEP webCEP = new(mxtCep.Text);
+                txtLogradouro.Text = webCEP.TipoLagradouro + " " + webCEP.Lagradouro;
+                txtBairro.Text = webCEP.Bairro;
+                txtCidade.Text = webCEP.Cidade;
+                txtUf.Text = webCEP.UF;
+                txtNumero.Focus();
+
+
+            }
+
         }
     }
 }

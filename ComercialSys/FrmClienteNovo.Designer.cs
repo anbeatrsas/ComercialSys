@@ -329,7 +329,7 @@
             // label13
             // 
             label13.AutoSize = true;
-            label13.Location = new Point(186, 92);
+            label13.Location = new Point(154, 92);
             label13.Name = "label13";
             label13.Size = new Size(38, 15);
             label13.TabIndex = 2;
@@ -394,16 +394,16 @@
             // 
             // txtBairro
             // 
-            txtBairro.Location = new Point(186, 110);
+            txtBairro.Location = new Point(151, 110);
             txtBairro.Name = "txtBairro";
-            txtBairro.Size = new Size(96, 23);
+            txtBairro.Size = new Size(131, 23);
             txtBairro.TabIndex = 1;
             // 
             // txtComplemento
             // 
             txtComplemento.Location = new Point(47, 110);
             txtComplemento.Name = "txtComplemento";
-            txtComplemento.Size = new Size(133, 23);
+            txtComplemento.Size = new Size(98, 23);
             txtComplemento.TabIndex = 1;
             // 
             // txtLogradouro
@@ -420,6 +420,7 @@
             mxtCep.Name = "mxtCep";
             mxtCep.Size = new Size(63, 23);
             mxtCep.TabIndex = 0;
+            mxtCep.Leave += mxtCep_Leave;
             // 
             // groupBox1
             // 
