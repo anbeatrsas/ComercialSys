@@ -235,6 +235,7 @@
             txtNome.Name = "txtNome";
             txtNome.Size = new Size(334, 23);
             txtNome.TabIndex = 0;
+            txtNome.TextChanged += txtNome_TextChanged;
             // 
             // txtEmail
             // 
@@ -586,7 +587,7 @@
         private DataGridViewTextBoxColumn clsUf;
         private DataGridViewTextBoxColumn clnTipoEndereco;
         private Label label10;
-        private TextBox txtClienteId;
+        public TextBox txtClienteId;
         private Label label11;
         private Label label12;
         private Label label15;

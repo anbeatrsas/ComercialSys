@@ -91,6 +91,8 @@ namespace ComercialSys
         {
 
             FrmClienteNovo frmClienteNovo = new();
+            frmClienteNovo.txtClienteId.Text = dgvClientes.Rows[dgvClientes.CurrentRow.Index].Cells[0].Value.ToString();
+
             frmClienteNovo.Show();
 
            

@@ -112,13 +112,18 @@ namespace ComercialSys
         private void FrmClienteNovo_Load(object sender, EventArgs e)
         {
 
-            FrmClienteConsulta frmClienteConsulta = new();
-
+            //FrmClienteConsulta frmClienteConsulta = new();
+            if (txtClienteId.Text != string.Empty)
+            {
+                var cliente = Cliente.ObterPorId(int.Parse(txtClienteId.Text));
+                txtNome.Text = cliente.Nome;
+            }
 
         }
 
+        private void txtNome_TextChanged(object sender, EventArgs e)
+        {
 
-
-
+        }
     }
 }

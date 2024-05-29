@@ -165,6 +165,7 @@
             dgvClientes.Name = "dgvClientes";
             dgvClientes.ReadOnly = true;
             dgvClientes.RowHeadersVisible = false;
+            dgvClientes.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvClientes.Size = new Size(839, 232);
             dgvClientes.TabIndex = 7;
             dgvClientes.CellDoubleClick += dgvClientes_CellDoubleClick;
