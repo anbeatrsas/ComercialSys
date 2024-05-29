@@ -531,6 +531,7 @@
             Controls.Add(groupBox1);
             Name = "FrmClienteNovo";
             Text = "FrmClienteNovo";
+            Load += FrmClienteNovo_Load;
             tabControl1.ResumeLayout(false);
             tbpDadosPessoais.ResumeLayout(false);
             tbpDadosPessoais.PerformLayout();

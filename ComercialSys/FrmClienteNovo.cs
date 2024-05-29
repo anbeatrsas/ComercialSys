@@ -94,7 +94,7 @@ namespace ComercialSys
         {
 
             mxtCep.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
-            if(mxtCep.Text.Length == 8)
+            if (mxtCep.Text.Length == 8)
             {
 
                 WebCEP webCEP = new(mxtCep.Text);
@@ -108,5 +108,17 @@ namespace ComercialSys
             }
 
         }
+
+        private void FrmClienteNovo_Load(object sender, EventArgs e)
+        {
+
+            FrmClienteConsulta frmClienteConsulta = new();
+
+
+        }
+
+
+
+
     }
 }

@@ -86,5 +86,19 @@ namespace ComercialSys
             int clienteId = Convert.ToInt32(dgvClientes.Rows[dgvClientes.CurrentRow.Index].Cells[0].Value);
             CarregaGridEndereco(clienteId);
         }
+
+        private void dgvClientes_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+            FrmClienteNovo frmClienteNovo = new();
+            frmClienteNovo.Show();
+
+           
+
+            this.Hide();
+
+           
+
+        }
     }
 }

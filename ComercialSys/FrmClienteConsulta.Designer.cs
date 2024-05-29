@@ -167,6 +167,7 @@
             dgvClientes.RowHeadersVisible = false;
             dgvClientes.Size = new Size(839, 232);
             dgvClientes.TabIndex = 7;
+            dgvClientes.CellDoubleClick += dgvClientes_CellDoubleClick;
             dgvClientes.SelectionChanged += dgvClientes_SelectionChanged;
             // 
             // clnId
