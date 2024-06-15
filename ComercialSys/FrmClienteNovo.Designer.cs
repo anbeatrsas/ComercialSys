@@ -124,6 +124,7 @@
             txtClienteId.TabIndex = 6;
             txtClienteId.Text = "0";
             txtClienteId.Visible = false;
+            txtClienteId.TextChanged += txtClienteId_TextChanged;
             // 
             // btnEditar
             // 
@@ -133,6 +134,7 @@
             btnEditar.TabIndex = 2;
             btnEditar.Text = "&Editar";
             btnEditar.UseVisualStyleBackColor = true;
+            btnEditar.Click += btnEditar_Click;
             // 
             // btnInserir
             // 

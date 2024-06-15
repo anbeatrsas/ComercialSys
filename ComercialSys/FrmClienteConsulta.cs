@@ -99,8 +99,6 @@ namespace ComercialSys
 
             this.Hide();
 
-           
-
         }
     }
 }

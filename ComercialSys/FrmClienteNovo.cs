@@ -117,11 +117,25 @@ namespace ComercialSys
             {
                 var cliente = Cliente.ObterPorId(int.Parse(txtClienteId.Text));
                 txtNome.Text = cliente.Nome;
+                txtEmail.Text = cliente.Email;
+                mxtTelefone.Text = cliente.Telefone;
+                mxtCpf.Text = cliente.Cpf;
+                dtpDataNasc.Value = cliente.Data_nasc;
             }
 
         }
 
         private void txtNome_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtClienteId_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnEditar_Click(object sender, EventArgs e)
         {
 
         }
