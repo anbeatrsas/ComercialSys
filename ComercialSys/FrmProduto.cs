@@ -26,11 +26,32 @@ namespace ComercialSys
             (npEstoqueMinimo.Value), decimal.Parse(txtDesconto.Text));
             produto.Inserir();
 
-            
+
 
         }
 
         private void FrmProduto_Load(object sender, EventArgs e)
+        {
+
+            var lista = Produto.ObterLista();
+            dgvProdutos.Rows.Clear();
+            int count = 0;
+
+            foreach (var produto in lista)
+            {
+
+                dgvProdutos.Rows.Add();
+                dgvProdutos.Rows[count].Cells[0].Value = produto.Id;
+                dgvProdutos.Rows[count].Cells[1].Value = produto.Cod_barras;
+                dgvProdutos.Rows[count].Cells[2].Value = produto.Descricao;
+                dgvProdutos.Rows[count].Cells[3].Value = produto.Valor_unit;
+                dgvProdutos.Rows[count].Cells[4].Value = produto.;
+
+                count++;
+
+            }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }

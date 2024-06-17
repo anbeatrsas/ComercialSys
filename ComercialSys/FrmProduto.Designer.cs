@@ -44,7 +44,7 @@
             npEstoqueMinimo = new NumericUpDown();
             label8 = new Label();
             label9 = new Label();
-            dataGridView1 = new DataGridView();
+            dgvProdutos = new DataGridView();
             clnId = new DataGridViewTextBoxColumn();
             clnCodBarras = new DataGridViewTextBoxColumn();
             clnDescricao = new DataGridViewTextBoxColumn();
@@ -57,7 +57,7 @@
             txtValorUnit = new TextBox();
             txtCategoriaId = new TextBox();
             ((System.ComponentModel.ISupportInitialize)npEstoqueMinimo).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgvProdutos).BeginInit();
             SuspendLayout();
             // 
             // label2
@@ -207,18 +207,19 @@
             label9.TabIndex = 5;
             label9.Text = "Desconto";
             // 
-            // dataGridView1
+            // dgvProdutos
             // 
-            dataGridView1.AllowUserToAddRows = false;
-            dataGridView1.AllowUserToDeleteRows = false;
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { clnId, clnCodBarras, clnDescricao, clnValorUnit, clnUnidadeVenda, clnCategoria, clnEstoqueMin, clnClasseDesconto });
-            dataGridView1.Location = new Point(51, 347);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.ReadOnly = true;
-            dataGridView1.RowHeadersVisible = false;
-            dataGridView1.Size = new Size(978, 150);
-            dataGridView1.TabIndex = 10;
+            dgvProdutos.AllowUserToAddRows = false;
+            dgvProdutos.AllowUserToDeleteRows = false;
+            dgvProdutos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvProdutos.Columns.AddRange(new DataGridViewColumn[] { clnId, clnCodBarras, clnDescricao, clnValorUnit, clnUnidadeVenda, clnCategoria, clnEstoqueMin, clnClasseDesconto });
+            dgvProdutos.Location = new Point(51, 347);
+            dgvProdutos.Name = "dgvProdutos";
+            dgvProdutos.ReadOnly = true;
+            dgvProdutos.RowHeadersVisible = false;
+            dgvProdutos.Size = new Size(978, 150);
+            dgvProdutos.TabIndex = 10;
+
             // 
             // clnId
             // 
@@ -304,7 +305,7 @@
             Controls.Add(txtCategoriaId);
             Controls.Add(txtValorUnit);
             Controls.Add(txtDesconto);
-            Controls.Add(dataGridView1);
+            Controls.Add(dgvProdutos);
             Controls.Add(npEstoqueMinimo);
             Controls.Add(label8);
             Controls.Add(label7);
@@ -325,7 +326,7 @@
             Text = "FrmProduto";
             Load += FrmProduto_Load;
             ((System.ComponentModel.ISupportInitialize)npEstoqueMinimo).EndInit();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgvProdutos).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -348,7 +349,7 @@
         private NumericUpDown npEstoqueMinimo;
         private Label label8;
         private Label label9;
-        private DataGridView dataGridView1;
+        private DataGridView dgvProdutos;
         private DataGridViewTextBoxColumn clnId;
         private DataGridViewTextBoxColumn clnCodBarras;
         private DataGridViewTextBoxColumn clnDescricao;
