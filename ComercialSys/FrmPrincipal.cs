@@ -31,7 +31,7 @@ namespace ComercialSys
 
             FrmCategoria frmCategoria = new FrmCategoria();
             frmCategoria.MdiParent = this;
-            
+
             frmCategoria.StartPosition = FormStartPosition.CenterScreen;
             frmCategoria.Show();
 
@@ -50,6 +50,15 @@ namespace ComercialSys
             //tslUsuario.Text = Program.Usuario.Nome + " - " + Program.Usuario.Nivel.Nome;
 
 
+
+        }
+
+        private void novoToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            FrmProduto frmProduto = new();
+
+            frmProduto.StartPosition = FormStartPosition.CenterScreen; 
+            frmProduto.Show();
 
         }
     }

@@ -20,7 +20,7 @@ namespace ComercialSys
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
             //Application.Run(new FrmPrincipal());
-            Application.Run(new FrmClienteConsulta());
+            Application.Run(new FrmPrincipal());
         }
     }
 }
