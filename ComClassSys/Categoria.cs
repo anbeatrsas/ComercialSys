@@ -13,7 +13,7 @@ namespace ComClassSys
     {
 
         public int Id { get; set; }
-        public string Nome { get; set; }
+        public string? Nome { get; set; }
         public string? Sigla { get; set; }
 
 
@@ -97,7 +97,7 @@ namespace ComClassSys
         public static Categoria ObterPorId(int id)
         {
 
-            Categoria categoria = new Categoria();
+            Categoria Categoria = new Categoria();
             var cmd = Banco.Abrir();
             cmd.CommandType = CommandType.Text;
             cmd.CommandText = $"select * from categorias where id = {id}";
@@ -106,14 +106,14 @@ namespace ComClassSys
             while (dr.Read())
             {
 
-                categoria.Id = dr.GetInt32(0);
-                categoria.Nome = dr.GetString(1);
-                categoria.Sigla = dr.GetString(2);
+                Categoria.Id = dr.GetInt32(0);
+                Categoria.Nome = dr.GetString(1);
+                Categoria.Sigla = dr.GetString(2);
 
 
             }
 
-            return categoria;
+            return Categoria;
 
 
         }

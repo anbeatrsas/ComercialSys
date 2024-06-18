@@ -31,7 +31,6 @@
             label2 = new Label();
             label1 = new Label();
             txtCodBarras = new TextBox();
-            txtDescricao = new TextBox();
             txtUnidadeVenda = new TextBox();
             btnAdicionar = new Button();
             btnEditar = new Button();
@@ -55,7 +54,10 @@
             clnClasseDesconto = new DataGridViewTextBoxColumn();
             txtDesconto = new TextBox();
             txtValorUnit = new TextBox();
-            txtCategoriaId = new TextBox();
+            cmbCategoria = new ComboBox();
+            txtDescricao = new TextBox();
+            txtId = new TextBox();
+            label10 = new Label();
             ((System.ComponentModel.ISupportInitialize)npEstoqueMinimo).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvProdutos).BeginInit();
             SuspendLayout();
@@ -64,7 +66,7 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 21.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label2.Location = new Point(472, 50);
+            label2.Location = new Point(455, 50);
             label2.Name = "label2";
             label2.Size = new Size(143, 40);
             label2.TabIndex = 1;
@@ -74,7 +76,7 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label1.Location = new Point(507, 87);
+            label1.Location = new Point(490, 87);
             label1.Name = "label1";
             label1.Size = new Size(73, 13);
             label1.TabIndex = 2;
@@ -86,13 +88,6 @@
             txtCodBarras.Name = "txtCodBarras";
             txtCodBarras.Size = new Size(100, 23);
             txtCodBarras.TabIndex = 3;
-            // 
-            // txtDescricao
-            // 
-            txtDescricao.Location = new Point(543, 218);
-            txtDescricao.Name = "txtDescricao";
-            txtDescricao.Size = new Size(242, 23);
-            txtDescricao.TabIndex = 3;
             // 
             // txtUnidadeVenda
             // 
@@ -120,6 +115,7 @@
             btnEditar.TabIndex = 4;
             btnEditar.Text = "&Editar";
             btnEditar.UseVisualStyleBackColor = true;
+            btnEditar.Click += btnEditar_Click;
             // 
             // btnConsultar
             // 
@@ -129,6 +125,7 @@
             btnConsultar.TabIndex = 4;
             btnConsultar.Text = "&Consultar";
             btnConsultar.UseVisualStyleBackColor = true;
+            btnConsultar.Click += btnConsultar_Click;
             // 
             // label3
             // 
@@ -176,9 +173,9 @@
             label7.Font = new Font("Segoe UI", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label7.Location = new Point(284, 200);
             label7.Name = "label7";
-            label7.Size = new Size(69, 13);
+            label7.Size = new Size(57, 13);
             label7.TabIndex = 5;
-            label7.Text = "ID categoria";
+            label7.Text = "Categoria";
             // 
             // npEstoqueMinimo
             // 
@@ -201,7 +198,7 @@
             // 
             label9.AutoSize = true;
             label9.Font = new Font("Segoe UI", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label9.Location = new Point(412, 200);
+            label9.Location = new Point(284, 260);
             label9.Name = "label9";
             label9.Size = new Size(56, 13);
             label9.TabIndex = 5;
@@ -219,7 +216,6 @@
             dgvProdutos.RowHeadersVisible = false;
             dgvProdutos.Size = new Size(978, 150);
             dgvProdutos.TabIndex = 10;
-
             // 
             // clnId
             // 
@@ -278,7 +274,7 @@
             // 
             // txtDesconto
             // 
-            txtDesconto.Location = new Point(412, 218);
+            txtDesconto.Location = new Point(284, 278);
             txtDesconto.Name = "txtDesconto";
             txtDesconto.Size = new Size(100, 23);
             txtDesconto.TabIndex = 11;
@@ -290,19 +286,48 @@
             txtValorUnit.Size = new Size(100, 23);
             txtValorUnit.TabIndex = 12;
             // 
-            // txtCategoriaId
+            // cmbCategoria
             // 
-            txtCategoriaId.Location = new Point(279, 218);
-            txtCategoriaId.Name = "txtCategoriaId";
-            txtCategoriaId.Size = new Size(100, 23);
-            txtCategoriaId.TabIndex = 13;
+            cmbCategoria.FormattingEnabled = true;
+            cmbCategoria.Location = new Point(284, 218);
+            cmbCategoria.Name = "cmbCategoria";
+            cmbCategoria.Size = new Size(225, 23);
+            cmbCategoria.TabIndex = 15;
+            // 
+            // txtDescricao
+            // 
+            txtDescricao.Location = new Point(542, 218);
+            txtDescricao.Name = "txtDescricao";
+            txtDescricao.Size = new Size(243, 23);
+            txtDescricao.TabIndex = 16;
+            txtDescricao.TextChanged += txtDescricao_TextChanged;
+            // 
+            // txtId
+            // 
+            txtId.Location = new Point(411, 278);
+            txtId.Name = "txtId";
+            txtId.ReadOnly = true;
+            txtId.Size = new Size(100, 23);
+            txtId.TabIndex = 17;
+            // 
+            // label10
+            // 
+            label10.AutoSize = true;
+            label10.Font = new Font("Segoe UI", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label10.Location = new Point(411, 260);
+            label10.Name = "label10";
+            label10.Size = new Size(18, 13);
+            label10.TabIndex = 5;
+            label10.Text = "ID";
             // 
             // FrmProduto
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1065, 572);
-            Controls.Add(txtCategoriaId);
+            Controls.Add(txtId);
+            Controls.Add(txtDescricao);
+            Controls.Add(cmbCategoria);
             Controls.Add(txtValorUnit);
             Controls.Add(txtDesconto);
             Controls.Add(dgvProdutos);
@@ -311,6 +336,7 @@
             Controls.Add(label7);
             Controls.Add(label6);
             Controls.Add(label5);
+            Controls.Add(label10);
             Controls.Add(label9);
             Controls.Add(label4);
             Controls.Add(label3);
@@ -318,7 +344,6 @@
             Controls.Add(btnEditar);
             Controls.Add(btnAdicionar);
             Controls.Add(txtUnidadeVenda);
-            Controls.Add(txtDescricao);
             Controls.Add(txtCodBarras);
             Controls.Add(label2);
             Controls.Add(label1);
@@ -336,7 +361,6 @@
         private Label label2;
         private Label label1;
         private TextBox txtCodBarras;
-        private TextBox txtDescricao;
         private TextBox txtUnidadeVenda;
         private Button btnAdicionar;
         private Button btnEditar;
@@ -360,6 +384,9 @@
         private DataGridViewTextBoxColumn clnClasseDesconto;
         private TextBox txtDesconto;
         private TextBox txtValorUnit;
-        private TextBox txtCategoriaId;
+        private ComboBox cmbCategoria;
+        private TextBox txtDescricao;
+        private TextBox txtId;
+        private Label label10;
     }
 }

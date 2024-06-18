@@ -15,7 +15,7 @@ namespace ComClassSys
         public string? Descricao { get; set; }
         public decimal Valor_unit { get; set; }
         public string Unidade_venda { get; set; }
-        public int Categoria_id { get; set; }
+        public Categoria Categoria { get; set; }
         public decimal Estoque_minimo { get; set; }
         public decimal Classe_desconto { get; set; }
         public string? Imagem { get; set; }
@@ -30,14 +30,14 @@ namespace ComClassSys
             }
 
 
-        public Produto(string cod_barras, string descricao, decimal valor_unit, string unidade_venda, int categoria_id, decimal estoque_minimo, decimal classe_desconto, string imagem, DateTime data_cad)
+        public Produto(string cod_barras, string descricao, decimal valor_unit, string unidade_venda, Categoria categoria, decimal estoque_minimo, decimal classe_desconto, string imagem, DateTime data_cad)
             {
 
                 Cod_barras = cod_barras;
                 Descricao = descricao;
                 Valor_unit = valor_unit;
                 Unidade_venda = unidade_venda;
-                Categoria_id = categoria_id;
+                Categoria = categoria;
                 Estoque_minimo = estoque_minimo;
                 Classe_desconto = classe_desconto;
                 Imagem = imagem;
@@ -46,7 +46,7 @@ namespace ComClassSys
             }
 
 
-        public Produto(int id, string cod_barras, string descricao, decimal valor_unit, string unidade_venda, int categoria_id, decimal estoque_minimo, decimal classe_desconto, string imagem, DateTime data_cad)
+        public Produto(int id, string cod_barras, string descricao, decimal valor_unit, string unidade_venda, Categoria categoria, decimal estoque_minimo, decimal classe_desconto, string imagem, DateTime data_cad)
         {
 
                 Id = id;
@@ -54,7 +54,7 @@ namespace ComClassSys
                 Descricao = descricao;
                 Valor_unit = valor_unit;
                 Unidade_venda = unidade_venda;
-                Categoria_id = categoria_id;
+                Categoria = categoria;
                 Estoque_minimo = estoque_minimo;
                 Classe_desconto = classe_desconto;
                 Imagem = imagem;
@@ -63,7 +63,7 @@ namespace ComClassSys
         }
 
 
-        public Produto(int id, string cod_barras, string descricao, decimal valor_unit, string unidade_venda, int categoria_id, decimal estoque_minimo, decimal classe_desconto, DateTime data_cad)
+        public Produto(int id, string cod_barras, string descricao, decimal valor_unit, string unidade_venda, Categoria categoria, decimal estoque_minimo, decimal classe_desconto, DateTime data_cad)
         {
 
             Id = id;
@@ -71,15 +71,29 @@ namespace ComClassSys
             Descricao = descricao;
             Valor_unit = valor_unit;
             Unidade_venda = unidade_venda;
-            Categoria_id = categoria_id;
+            Categoria = categoria;
             Estoque_minimo = estoque_minimo;
             Classe_desconto = classe_desconto;
             Data_cad = data_cad;
 
         }
 
+        public Produto(int id, string cod_barras, string descricao, decimal valor_unit, string unidade_venda, Categoria categoria, decimal estoque_minimo, decimal classe_desconto)
+        {
 
-        public Produto(string cod_barras, string descricao, decimal valor_unit, string unidade_venda, int categoria_id, decimal estoque_minimo, decimal classe_desconto)
+            Id = id;
+            Cod_barras = cod_barras;
+            Descricao = descricao;
+            Valor_unit = valor_unit;
+            Unidade_venda = unidade_venda;
+            Categoria = categoria;
+            Estoque_minimo = estoque_minimo;
+            Classe_desconto = classe_desconto;
+
+        }
+
+
+        public Produto(string cod_barras, string descricao, decimal valor_unit, string unidade_venda, Categoria categoria, decimal estoque_minimo, decimal classe_desconto)
         {
 
             
@@ -87,7 +101,7 @@ namespace ComClassSys
             Descricao = descricao;
             Valor_unit = valor_unit;
             Unidade_venda = unidade_venda;
-            Categoria_id = categoria_id;
+            Categoria = categoria;
             Estoque_minimo = estoque_minimo;
             Classe_desconto = classe_desconto;
 
@@ -105,7 +119,7 @@ namespace ComClassSys
             cmd.Parameters.AddWithValue("spdescricao", Descricao);
             cmd.Parameters.AddWithValue("spvalor_unit", Valor_unit);
             cmd.Parameters.AddWithValue("spunidade_venda", Unidade_venda);
-            cmd.Parameters.AddWithValue("spcategoria_id", Categoria_id);
+            cmd.Parameters.AddWithValue("spcategoria_id", Categoria.Id);
             cmd.Parameters.AddWithValue("spestoque_minimo", Estoque_minimo);
             cmd.Parameters.AddWithValue("spclasse_desconto", Classe_desconto);
 
@@ -130,10 +144,10 @@ namespace ComClassSys
                 produto.Descricao = dr.GetString(2);
                 produto.Valor_unit = dr.GetDecimal(3);
                 produto.Unidade_venda = dr.GetString(4);
-                produto.Categoria_id = dr.GetInt32(5);
+                produto.Categoria = Categoria.ObterPorId(dr.GetInt32(5));
                 produto.Estoque_minimo = dr.GetDecimal(6);
                 produto.Classe_desconto = dr.GetDecimal(7);
-                produto.Imagem = dr.GetString(8);
+                //produto.Imagem = dr.GetString(8);
                 produto.Data_cad = dr.GetDateTime(9);
 
             }
@@ -154,7 +168,7 @@ namespace ComClassSys
             cmd.Parameters.AddWithValue("spcod_barras", Cod_barras);
             cmd.Parameters.AddWithValue("spdescricao", Descricao);
             cmd.Parameters.AddWithValue("spvalor_unit", Valor_unit);
-            cmd.Parameters.AddWithValue("spcategoria_id", Categoria_id);
+            cmd.Parameters.AddWithValue("spcategoria_id", Categoria.Id);
             cmd.Parameters.AddWithValue("spestoque_minimo", Estoque_minimo);
             cmd.Parameters.AddWithValue("spclasse_desconto", Classe_desconto);
 
@@ -193,10 +207,10 @@ namespace ComClassSys
                 dr.GetString(2),
                 dr.GetDecimal(3),
                 dr.GetString(4),
-                dr.GetInt32(5),
+                Categoria.ObterPorId(dr.GetInt32(5)),
                 dr.GetDecimal(6),
                 dr.GetDecimal(7),
-                dr.GetString(8),
+                //dr.GetString(8),
                 dr.GetDateTime(9))
                 );
 
