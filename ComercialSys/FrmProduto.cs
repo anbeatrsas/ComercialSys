@@ -65,14 +65,17 @@ namespace ComercialSys
         private void btnEditar_Click(object sender, EventArgs e)
         {
 
-            Produto produto = Produto(Convert.ToInt32(txtId.Text)),
-            txtCodBarras.Text = produto.Cod_barras,
-            txtDesconto.Text = Convert.ToString(produto.Classe_desconto);
-            txtValorUnit.Text = Convert.ToString(produto.Valor_unit);
-            txtUnidadeVenda.Text = produto.Unidade_venda;
-            cmbCategoria.SelectedIndex = cmbCategoria.FindString(produto.Categoria.Nome);
-            txtDescricao.Text = produto.Descricao;
-            npEstoqueMinimo.Value = produto.Estoque_minimo;
+            Produto produto = new(
+            Convert.ToInt32(txtId.Text),
+            txtCodBarras.Text,
+            txtDescricao.Text,
+            decimal.Parse(txtValorUnit.Text),
+            txtUnidadeVenda.Text,
+            Categoria.ObterPorId(Convert.ToInt32(cmbCategoria.SelectedValue)),
+            npEstoqueMinimo.Value,
+            decimal.Parse(txtDesconto.Text)
+
+            );
 
             if (produto.Editar(produto.Id))
             {

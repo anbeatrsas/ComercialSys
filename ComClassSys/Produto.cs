@@ -168,6 +168,7 @@ namespace ComClassSys
             cmd.Parameters.AddWithValue("spcod_barras", Cod_barras);
             cmd.Parameters.AddWithValue("spdescricao", Descricao);
             cmd.Parameters.AddWithValue("spvalor_unit", Valor_unit);
+            cmd.Parameters.AddWithValue("spunidade_venda", Unidade_venda);
             cmd.Parameters.AddWithValue("spcategoria_id", Categoria.Id);
             cmd.Parameters.AddWithValue("spestoque_minimo", Estoque_minimo);
             cmd.Parameters.AddWithValue("spclasse_desconto", Classe_desconto);
