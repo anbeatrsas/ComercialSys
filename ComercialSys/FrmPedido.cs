@@ -23,5 +23,15 @@ namespace ComercialSys
             txtVendedor.Text = Program.Usuario.Id + " - " + Program.Usuario.Nome;
 
         }
+
+        private void textBox10_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox9_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
