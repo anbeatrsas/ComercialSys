@@ -98,7 +98,7 @@ namespace ComercialSys
                 double.Parse(txtQuantidade.Text), 
                 0
                 );
-
+            itemPedido.Inserir();
         }
     }
 }

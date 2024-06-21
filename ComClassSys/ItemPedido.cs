@@ -59,7 +59,7 @@ namespace ComClassSys
             cmd.Parameters.AddWithValue("spdesconto", Desconto);
 
 
-            Id = Convert.ToInt32(cmd.ExecuteScalar);
+            Id = Convert.ToInt32(cmd.ExecuteScalar());
 
         }
 
