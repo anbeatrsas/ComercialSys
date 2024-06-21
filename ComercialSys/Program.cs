@@ -7,11 +7,14 @@ namespace ComercialSys
     internal static class Program
     {
 
-        public static Usuario Usuario { get; set; } 
+        
 
         /// <summary>
-        ///  The main entry point for the application.
+        ///  Propriedade criada para armazenar os dados de usuário logado no sistema
         /// </summary>
+        /// 
+        public static Usuario Usuario { get; set; } 
+
         [STAThread]
         static void Main()
         {

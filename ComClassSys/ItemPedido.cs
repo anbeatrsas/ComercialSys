@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Transactions;
+using Mysqlx.Prepare;
 
 namespace ComClassSys
 {
@@ -13,16 +14,16 @@ namespace ComClassSys
         
 
         public int Id { get; set; }
-        public Pedido? Pedido { get; set; }
+        public int PedidoId { get; set; }
         public Produto Produto { get; set; }
         public double ValorUnit { get; set; }
         public double Quantidade { get; set; }
         public double Desconto { get; set; }
 
-        public ItemPedido(int id, Pedido pedido, Produto produto, double valorUnit, double quantidade, double desconto)
+        public ItemPedido(int id, int pedidoId, Produto produto, double valorUnit, double quantidade, double desconto)
         {
             Id = id;
-            Pedido = pedido;
+            PedidoId = pedidoId;
             Produto = produto;
             ValorUnit = valorUnit;
             Quantidade = quantidade;
@@ -30,15 +31,13 @@ namespace ComClassSys
         }
 
         public ItemPedido()
-        {
-
-            Pedido = new();
+        {           
 
         }
 
-        public ItemPedido(Pedido pedido, Produto produto, double valorUnit, double quantidade, double desconto)
+        public ItemPedido(int pedidoId, Produto produto, double valorUnit, double quantidade, double desconto)
         {
-            Pedido = pedido;
+            PedidoId = pedidoId;
             Produto = produto;
             ValorUnit = valorUnit;
             Quantidade = quantidade;
@@ -54,7 +53,7 @@ namespace ComClassSys
             var cmd = Banco.Abrir();
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.CommandText = "sp_itempedido_insert";
-            cmd.Parameters.AddWithValue("sppedido_id", Pedido.Id);
+            cmd.Parameters.AddWithValue("sppedido_id", PedidoId);
             cmd.Parameters.AddWithValue("spproduto_id", Produto.Id);
             cmd.Parameters.AddWithValue("spquantidade", Quantidade);
             cmd.Parameters.AddWithValue("spdesconto", Desconto);
@@ -80,6 +79,21 @@ namespace ComClassSys
         {
 
             List<ItemPedido> itens = new();
+
+            var cmd = Banco.Abrir();
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = $"select * from itempedido where pedido_id = {idPedido}";
+            var dr = cmd.ExecuteReader(); // resultado da consulta feita e será armazenada no data reader um leitor de dados, e no caso vai ser armazenada na variável dr
+
+            while (dr.Read()) // percorre todas as linhas do execute reader
+            {
+                itens.Add(new(dr.GetInt32(0), 
+                    dr.GetInt32(1), 
+                    Produto.ObterPorId(dr.GetInt32(2)), 
+                    dr.GetDouble(3), 
+                    dr.GetDouble(4), 
+                    dr.GetDouble(5)));
+            }
 
             return itens;
 
