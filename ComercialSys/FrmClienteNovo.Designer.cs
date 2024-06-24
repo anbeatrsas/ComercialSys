@@ -449,6 +449,7 @@
             dgvEnderecos.RowHeadersVisible = false;
             dgvEnderecos.Size = new Size(494, 131);
             dgvEnderecos.TabIndex = 3;
+            dgvEnderecos.CellContentClick += dgvEnderecos_CellContentClick;
             // 
             // clnCep
             // 

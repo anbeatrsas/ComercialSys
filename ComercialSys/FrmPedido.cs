@@ -65,6 +65,8 @@ namespace ComercialSys
 
         }
 
+        Produto produto = new();
+
         private void txtNumeroPedido_TextChanged(object sender, EventArgs e)
         {
 
@@ -76,12 +78,12 @@ namespace ComercialSys
             if (txtCodBarras.Text.Length > 4)
             {
 
-                var produto = Produto.ObterPorId(int.Parse(txtCodBarras.Text));
+                produto = Produto.ObterPorId(int.Parse(txtCodBarras.Text));
                 if (produto.Id > 0)
                 {
                     txtDescricao.Text = produto.Descricao;
                     txtValorUnit.Text = produto.Valor_unit.ToString();
-
+                    lblDescMax.Text = $"R$ {produto.Classe_desconto * produto.Valor_unit}";
 
                 }
 
@@ -92,13 +94,54 @@ namespace ComercialSys
 
         private void btnInserirItem_Click(object sender, EventArgs e)
         {
-            ItemPedido itemPedido = new(int.Parse(txtNumeroPedido.Text), 
-                Produto.ObterPorId(int.Parse(txtCodBarras.Text)), 
-                double.Parse(txtValorUnit.Text), 
-                double.Parse(txtQuantidade.Text), 
-                0
+            ItemPedido itemPedido = new(int.Parse(txtNumeroPedido.Text),
+                Produto.ObterPorId(int.Parse(txtCodBarras.Text)),
+                double.Parse(txtValorUnit.Text),
+                double.Parse(txtQuantidade.Text),
+                double.Parse(txtDescontoItem.Text)
                 );
             itemPedido.Inserir();
+
+            // limpar o dataGrid
+
+            dgvItens.Rows.Clear();
+            var itens = ItemPedido.ObterListaPorPedido(int.Parse(txtNumeroPedido.Text));
+            int count = 0;
+            double subTotal = 0;
+
+            foreach (var item in itens)
+            {
+
+                dgvItens.Rows.Add();
+                dgvItens.Rows[count].Cells[0].Value = $"count + 1"; // linha seq
+                dgvItens.Rows[count].Cells[1].Value = item.Produto.Cod_barras;
+                dgvItens.Rows[count].Cells[2].Value = item.Produto.Descricao;
+                dgvItens.Rows[count].Cells[3].Value = item.Produto.Unidade_venda;
+                dgvItens.Rows[count].Cells[4].Value = item.ValorUnit;
+                dgvItens.Rows[count].Cells[5].Value = item.Quantidade;
+                dgvItens.Rows[count].Cells[6].Value = item.Desconto;
+                dgvItens.Rows[count].Cells[7].Value = item.ValorUnit * item.Quantidade - item.Desconto;
+                subTotal += itemPedido.ValorUnit * itemPedido.Quantidade - itemPedido.Desconto;
+
+                count++;
+
+            }
+
+            txtSubtotal.Text = subTotal.ToString();
+
+        }
+
+        private void textBox6_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtQuantidade_TextChanged(object sender, EventArgs e)
+        {
+            if (txtQuantidade.Text.Length > 0)
+            {
+                lblDescMax.Text = $"R$ {produto.Classe_desconto * produto.Valor_unit * decimal.Parse(txtQuantidade.Text)}";
+            }
         }
     }
 }

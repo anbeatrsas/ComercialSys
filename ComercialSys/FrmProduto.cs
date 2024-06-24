@@ -140,5 +140,10 @@ namespace ComercialSys
             }
 
         }
+
+        private void dgvProdutos_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }

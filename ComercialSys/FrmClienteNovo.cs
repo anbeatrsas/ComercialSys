@@ -139,5 +139,10 @@ namespace ComercialSys
         {
 
         }
+
+        private void dgvEnderecos_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }
