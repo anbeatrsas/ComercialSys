@@ -101,8 +101,23 @@ namespace ComercialSys
                 double.Parse(txtDescontoItem.Text)
                 );
             itemPedido.Inserir();
+            // Limpa controles
+            txtCodBarras.Clear();
+            txtDescontoItem.Text = "0";
+            txtDescricao.Clear();
+            txtQuantidade.Text = "1";
+            txtValorUnit.Clear();
+            txtCodBarras.Focus();
 
-            // limpar o dataGrid
+
+            CarregaGrid();
+
+
+
+        }
+
+        private void CarregaGrid()
+        {
 
             dgvItens.Rows.Clear();
             var itens = ItemPedido.ObterListaPorPedido(int.Parse(txtNumeroPedido.Text));
@@ -113,7 +128,7 @@ namespace ComercialSys
             {
 
                 dgvItens.Rows.Add();
-                dgvItens.Rows[count].Cells[0].Value = $"count + 1"; // linha seq
+                dgvItens.Rows[count].Cells[0].Value = $"#{count + 1}"; // linha seq
                 dgvItens.Rows[count].Cells[1].Value = item.Produto.Cod_barras;
                 dgvItens.Rows[count].Cells[2].Value = item.Produto.Descricao;
                 dgvItens.Rows[count].Cells[3].Value = item.Produto.Unidade_venda;
@@ -121,14 +136,15 @@ namespace ComercialSys
                 dgvItens.Rows[count].Cells[5].Value = item.Quantidade;
                 dgvItens.Rows[count].Cells[6].Value = item.Desconto;
                 dgvItens.Rows[count].Cells[7].Value = item.ValorUnit * item.Quantidade - item.Desconto;
-                subTotal += itemPedido.ValorUnit * itemPedido.Quantidade - itemPedido.Desconto;
+                dgvItens.Rows[count].Cells[8].Value = item.Id;
+                subTotal += item.ValorUnit * item.Quantidade - item.Desconto;
+
 
                 count++;
 
             }
 
             txtSubtotal.Text = subTotal.ToString();
-
         }
 
         private void textBox6_TextChanged(object sender, EventArgs e)
@@ -142,6 +158,32 @@ namespace ComercialSys
             {
                 lblDescMax.Text = $"R$ {produto.Classe_desconto * produto.Valor_unit * decimal.Parse(txtQuantidade.Text)}";
             }
+        }
+
+        private void btnExcluirItem_Click(object sender, EventArgs e)
+        {
+
+            if (dgvItens.Rows.Count > 0)
+            {
+
+                int linha = dgvItens.CurrentRow.Index; // linha atual é armazenada em linha
+                string seq = dgvItens.Rows[linha].Cells[0].Value.ToString();
+                var confirma = MessageBox.Show($"Deseja confirmar a exclusão do Item {seq}?", "Excluir Item", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                if (confirma == DialogResult.Yes)
+                {
+                    ItemPedido.Remover(Convert.ToInt32(dgvItens.Rows[linha].Cells[8].Value));
+                    CarregaGrid();
+                }
+
+
+            }
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

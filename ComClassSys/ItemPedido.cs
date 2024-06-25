@@ -110,14 +110,14 @@ namespace ComClassSys
 
 
         // Excluir
-        public void Remover(int id)
+        public static void Remover(int id)
         {
 
             var cmd = Banco.Abrir();
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.CommandText = "sp_itempedido_delete";
 
-            cmd.Parameters.AddWithValue("spid", Id);
+            cmd.Parameters.AddWithValue("spid",id);
             cmd.ExecuteNonQuery();
 
         }
